@@ -11,7 +11,7 @@
 
   <div class="header-container">
     <img src="logo.jpg" alt="Logo" class="logo" />
-    <h1>Suggestion Box | सुझाव बॉक्स</h1>
+    <h1>Suggestion Box / सुझाव बॉक्स</h1>
   </div>
 
   <form id="suggestionForm"
@@ -19,12 +19,12 @@
         action="https://script.google.com/macros/s/AKfycbwywOU4-nT0fIZRKBmN2c_T6VF6AHECWaO-s00AM5m-gOwukVyNjr6yQrPb6S1j-ket/exec"
         target="hidden_iframe">
 
-    <label for="Name">Name\नाम: [optional]</label>
+    <label for="Name">Name / नाम [optional]</label>
     <input type="text" name="Name" id="Name">
 
-    <label for="COY">Company (COY)\कंपनी: [optional]</label>
+    <label for="COY">Company (COY) / कंपनी  [optional]</label>
     <select name="COY" id="COY">
-      <option value="">Select | चयन करें</option>
+      <option value="">Select / चयन करें</option>
       <option value="282">282</option>
       <option value="283">283</option>
       <option value="284">284</option>
@@ -32,26 +32,26 @@
       <option value="HQ">HQ</option>
     </select>
 
-    <label for="Contact">Contact No.\संपर्क संख्या: [optional]</label>
+    <label for="Contact">Contact No. / संपर्क संख्या [optional]</label>
     <input type="tel" name="Contact" id="Contact" pattern="[0-9]{10}" maxlength="10">
 
-    <label for="Category">Category\वर्ग: [Mandatory]</label>
+    <label for="Category">Category / वर्ग [Mandatory]</label>
     <select name="Category" id="Category" required>
-      <option value="">Select\चयन करें</option>
-      <option value="SAAF SAFAI">SAAF SAFAI\साफ सफाई</option>
-      <option value="PT AUR KHEL">PT AUR KHEL\पीटी और खेल</option>
-      <option value="ADM">ADM\प्रशासन</option>
-      <option value="TRAINING AUR COURSES">TRAINING AUR COURSES\प्रशिक्षण और पाठ्यक्रम</option>
-      <option value="LINE AUR LANGER">LINE AUR LANGER\लाइन और लंगर</option>
-      <option value="ANYA">ANYA\अन्य</option>
+      <option value="">Select / चयन करें</option>
+      <option value="SAAF SAFAI">SAAF SAFAI / साफ सफाई</option>
+      <option value="PT AUR KHEL">PT AUR KHEL / पीटी और खेल</option>
+      <option value="ADM">ADM / प्रशासन</option>
+      <option value="TRAINING AUR COURSES">TRAINING AUR COURSES / प्रशिक्षण और पाठ्यक्रम</option>
+      <option value="LINE AUR LANGER">LINE AUR LANGER / लाइन और लंगर</option>
+      <option value="ANYA">ANYA / अन्य</option>
     </select>
 
-    <label for="Suggestion">Suggestion (max 20 words)\सुझाव (20 शब्द तक):</label>
+    <label for="Suggestion">Suggestion (max 20 words) / सुझाव (20 शब्द तक)</label>
     <textarea name="Suggestion" id="Suggestion" rows="4" required></textarea>
 
     <input type="hidden" name="IP" id="ipField">
 
-    <button type="submit">Submit\जमा करें</button>
+    <button type="submit">Submit / जमा करें</button>
   </form>
 
   <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
