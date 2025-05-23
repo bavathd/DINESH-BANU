@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Suggestion Box | सुझाव बॉक्स</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="logo.jpg">
+</head>
+<body>
+
+  <div class="header-container">
+    <img src="logo.jpg" alt="Logo" class="logo" />
+    <h1>Suggestion Box | सुझाव बॉक्स</h1>
+  </div>
+
+  <form id="suggestionForm"
+        method="POST"
+        action="https://script.google.com/macros/s/AKfycbwywOU4-nT0fIZRKBmN2c_T6VF6AHECWaO-s00AM5m-gOwukVyNjr6yQrPb6S1j-ket/exec"
+        target="hidden_iframe">
+
+    <label for="Name">Name | नाम:</label>
+    <input type="text" name="Name" id="Name" required>
+
+    <label for="COY">Company (COY) | कंपनी:</label>
+    <select name="COY" id="COY" required>
+      <option value="">Select | चयन करें</option>
+      <option value="FD COY 282">FD COY 282</option>
+      <option value="FD COY 283">FD COY 283</option>
+      <option value="FD COY 284">FD COY 284</option>
+      <option value="PARK 317">PARK 317</option>
+      <option value="RHQ">RHQ</option>
+    </select>
+
+    <label for="Contact">Contact No. | संपर्क संख्या:</label>
+    <input type="tel" name="Contact" id="Contact" pattern="[0-9]{10}" maxlength="10" required>
+
+    <label for="Category">Category | वर्ग:</label>
+    <select name="Category" id="Category" required>
+      <option value="">Select | चयन करें</option>
+      <option value="SAAF SAFAI">SAAF SAFAI | साफ सफाई</option>
+      <option value="PT AUR KHEL">PT AUR KHEL | पीटी और खेल</option>
+      <option value="ADM">ADM | प्रशासन</option>
+      <option value="TRAINING AUR COURSES">TRAINING AUR COURSES | प्रशिक्षण और पाठ्यक्रम</option>
+      <option value="LINE AUR LANGER">LINE AUR LANGER | लाइन और लंगर</option>
+      <option value="ANYA">ANYA | अन्य</option>
+    </select>
+
+    <label for="Suggestion">Suggestion (max 20 words) | सुझाव (20 शब्द तक):</label>
+    <textarea name="Suggestion" id="Suggestion" rows="4" required></textarea>
+
+    <input type="hidden" name="IP" id="ipField">
+
+    <button type="submit">Submit | जमा करें</button>
+  </form>
+
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+  <script>
+    // Prevent resubmission
+      let submitted = false;
+
+  document.getElementById("suggestionForm").addEventListener("submit", function (e) {
+    if (submitted) {
+      e.preventDefault();
+      return;
+    }
+    submitted = true;
+
+    // Alert & reset form after short delay to ensure submission completes
+    setTimeout(() => {
+      alert("Submitted successfully!");
+      document.getElementById("suggestionForm").reset();
+      submitted = false; // Optional: allow resubmission later
+    }, 100); // Delay to allow Google Script to capture the data
+  });
+
+    // Word limit: 20
+    document.getElementById("Suggestion").addEventListener("input", function () {
+      const words = this.value.trim().split(/\s+/);
+      if (words.length > 20) {
+        this.value = words.slice(0, 20).join(" ");
+      }
+    });
+
+    // Fetch public IP
+    fetch("https://api.ipify.org?format=json")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("ipField").value = data.ip;
+      });
+  </script>
+
+</body>
+</html>

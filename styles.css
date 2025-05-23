@@ -1,0 +1,81 @@
+/* styles.css */
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 10px;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin: 20px 0;
+  font-size: 24px;
+}
+
+form {
+  background-color: white;
+  max-width: 600px;
+  margin: 15px auto;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+label {
+  display: block;
+  margin: 10px 0 6px;
+  font-weight: 600;
+}
+
+input[type="text"],
+input[type="tel"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.download-form {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px; /* space between logo and title */
+  margin-bottom: 20px;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+}
