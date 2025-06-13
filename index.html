@@ -78,7 +78,7 @@
     // Word limit: 20
     document.getElementById("Suggestion").addEventListener("input", function () {
       const words = this.value.trim().split(/\s+/);
-      if (words.length > 20) {
+      if (words.length > 50) {
         this.value = words.slice(0, 50).join(" ");
       }
     });
