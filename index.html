@@ -46,7 +46,7 @@
       <option value="others">Others / अन्य</option>
     </select>
 
-    <label for="Suggestion">Suggestion (max 20 words) / सुझाव (20 शब्द तक)</label>
+    <label for="Suggestion">Suggestion (max 50 words) / सुझाव (20 शब्द तक)</label>
     <textarea name="Suggestion" id="Suggestion" rows="4" required></textarea>
 
     <input type="hidden" name="IP" id="ipField">
@@ -79,7 +79,7 @@
     document.getElementById("Suggestion").addEventListener("input", function () {
       const words = this.value.trim().split(/\s+/);
       if (words.length > 20) {
-        this.value = words.slice(0, 20).join(" ");
+        this.value = words.slice(0, 50).join(" ");
       }
     });
 
