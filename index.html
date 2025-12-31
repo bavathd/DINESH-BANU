@@ -1,95 +1,135 @@
 <!DOCTYPE html>
 <html lang="hi">
-<head>
-  <meta charset="UTF-8">
-  <title>Suggestion Box / सुझाव बॉक्स</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <!-- <link rel="icon" type="image/png" href="logo.jpg"> -->
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Suggestion Box / सुझाव बॉक्स</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- <link rel="icon" type="image/png" href="logo.jpg"> -->
+  </head>
+  <body>
+    <div class="header-container">
+      <!-- <img src="logo.jpg" alt="Logo" class="logo" /> -->
+      <h1>Suggestion Box / सुझाव बॉक्स</h1>
+    </div>
 
-  <div class="header-container">
-    <!-- <img src="logo.jpg" alt="Logo" class="logo" /> -->
-    <h1>Suggestion Box / सुझाव बॉक्स</h1>
-  </div>
+    <form id="suggestionForm">
+      <label for="Name">Name / नाम [Optional]</label>
+      <input type="text" name="Name" id="Name" />
 
-  <form id="suggestionForm"
-        method="POST"
-        action="https://script.google.com/macros/s/AKfycbzEGf6NByE5MV-O3jQuLFQlAxACpDPznLmFTSHrofDAwETxfgd5Z_Zww4x7zw8auDZK/exec"
-        target="hidden_iframe">
+      <label for="COY">Coy / कंपनी [Optional]</label>
+      <select name="COY" id="COY">
+        <option value="">Select / चयन करें</option>
+        <option value="282">282</option>
+        <option value="283">283</option>
+        <option value="284">284</option>
+        <option value="317">317</option>
+        <option value="HQ">HQ</option>
+      </select>
 
-    <label for="Name">Name / नाम [Optional]</label>
-    <input type="text" name="Name" id="Name">
+      <label for="Contact">Contact No / फ़ोन नंबर [Optional]</label>
+      <input
+        type="tel"
+        name="Contact"
+        id="Contact"
+        pattern="[0-9]{10}"
+        maxlength="10"
+      />
 
-    <label for="COY">Coy / कंपनी  [Optional]</label>
-    <select name="COY" id="COY">
-      <option value="">Select / चयन करें</option>
-      <option value="282">282</option>
-      <option value="283">283</option>
-      <option value="284">284</option>
-      <option value="317">317</option>
-      <option value="HQ">HQ</option>
-    </select>
+      <label for="Category">Category / वर्ग [Mandatory]</label>
+      <select name="Category" id="Category" required>
+        <option value="">Select / चयन करें</option>
+        <option value="Saaf Safai">Saaf Safai / साफ सफाई</option>
+        <option value="PT aur Khel">PT aur Khel / पीटी और खेल</option>
+        <option value="Adm">Adm / प्रशासन</option>
+        <option value="Training and Courses">
+          Training and Courses / प्रशिक्षण और पाठ्यक्रम
+        </option>
+        <option value="Line and Langer">Line and Langer / लाइन और लंगर</option>
+        <option value="others">Others / अन्य</option>
+      </select>
 
-    <label for="Contact">Contact No / फ़ोन नंबर [Optional]</label>
-    <input type="tel" name="Contact" id="Contact" pattern="[0-9]{10}" maxlength="10">
+      <label for="Suggestion"
+        >Suggestion (max 50 words) / सुझाव (50 शब्द तक)</label
+      >
+      <textarea name="Suggestion" id="Suggestion" rows="4" required></textarea>
 
-    <label for="Category">Category / वर्ग [Mandatory]</label>
-    <select name="Category" id="Category" required>
-      <option value="">Select / चयन करें</option>
-      <option value="Saaf Safai">Saaf Safai / साफ सफाई</option>
-      <option value="PT aur Khel">PT aur Khel / पीटी और खेल</option>
-      <option value="Adm">Adm / प्रशासन</option>
-      <option value="Training and Courses">Training and Courses / प्रशिक्षण और पाठ्यक्रम</option>
-      <option value="Line and Langer">Line and Langer / लाइन और लंगर</option>
-      <option value="others">Others / अन्य</option>
-    </select>
+      <label>Upload File:</label>
+      <input type="file" id="fileInput" />
+      <input type="hidden" name="IP" id="ipField" />
+      <button type="submit" id="submitBtn">Submit / जमा करें</button>
+    </form>
 
-    <label for="Suggestion">Suggestion (max 50 words) / सुझाव (50 शब्द तक)</label>
-    <textarea name="Suggestion" id="Suggestion" rows="4" required></textarea>
+    <iframe
+      name="hidden_iframe"
+      id="hidden_iframe"
+      style="display: none"
+    ></iframe>
 
-    <input type="hidden" name="IP" id="ipField">
+    <script>
+      const form = document.getElementById("suggestionForm");
+      const submitBtn = document.getElementById("submitBtn");
 
-    <button type="submit">Submit / जमा करें</button>
-  </form>
+      form.addEventListener("submit", function (e) {
+        e.preventDefault(); // Stop page refresh
 
-  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Uploading...";
 
-  <script>
-    // Prevent resubmission
-      let submitted = false;
+        const fileInput = document.getElementById("fileInput");
+        const file = fileInput.files[0];
 
-  document.getElementById("suggestionForm").addEventListener("submit", function (e) {
-    if (submitted) {
-      e.preventDefault();
-      return;
-    }
-    submitted = true;
-
-    // Alert & reset form after short delay to ensure submission completes
-    setTimeout(() => {
-      alert("Submitted successfully!");
-      document.getElementById("suggestionForm").reset();
-      submitted = false; // Optional: allow resubmission later
-    }, 100); // Delay to allow Google Script to capture the data
-  });
-
-    // Word limit: 20
-    document.getElementById("Suggestion").addEventListener("input", function () {
-      const words = this.value.trim().split(/\s+/);
-      if (words.length > 50) {
-        this.value = words.slice(0, 50).join(" ");
-      }
-    });
-
-    // Fetch public IP
-    fetch("https://api.ipify.org?format=json")
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("ipField").value = data.ip;
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const base64Data = e.target.result.split(",")[1];
+            sendData(base64Data, file.name, file.type);
+          };
+          reader.readAsDataURL(file);
+        } else {
+          sendData(null, null, null);
+        }
       });
-  </script>
 
-</body>
+      function sendData(base64, fileName, mimeType) {
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        // Add file details to the data object
+        if (base64) {
+          data.fileData = base64;
+          data.fileName = fileName;
+          data.mimeType = mimeType;
+        }
+
+        // Replace with your actual Web App URL
+        const scriptURL =
+          "https://script.google.com/macros/s/AKfycbzfvnqCqimn3opELyQhRY6dTq53DMMDJOMg_-IW4jo2IbCEFgg7hVoXpFuX5saUX-E1/exec";
+
+        fetch(scriptURL, {
+          method: "POST",
+          body: new URLSearchParams(data),
+          mode: "no-cors", // Essential for Apps Script
+        })
+          .then(() => {
+            alert("Submitted successfully!");
+            form.reset();
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Submit / जमा करें";
+          })
+          .catch((err) => {
+            console.error(err);
+            alert("Error submitting form.");
+            submitBtn.disabled = false;
+          });
+      }
+
+      // IP Fetching logic (Keep your existing code)
+      fetch("https://api.ipify.org?format=json")
+        .then((res) => res.json())
+        .then((data) => {
+          document.getElementById("ipField").value = data.ip;
+        });
+    </script>
+  </body>
 </html>
